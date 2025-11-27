@@ -4,6 +4,13 @@
 info = warning = lambda *x, **y: None
 
 def ok(data = None, custom: bool = False, **ot) -> dict:
+    if len(ot) == 0:
+        return {
+            'ok': True,
+            'data': data
+        } if data is not None else {
+            'ok': True
+        }
     if data is not None:
         ot['data'] = data
     info('OK detected, returning ' + str({
@@ -36,4 +43,4 @@ def fail(error = None) -> dict:
     }
 
 if __name__ == '__main__':
-    print(ok('ouob', test = True, number = 1, zzz = True))
+    print(ok('ouob'))
