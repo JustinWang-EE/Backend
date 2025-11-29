@@ -29,3 +29,16 @@ def get_category():
         return fail('Model Failed')
     
     return ok(category = ans[0], faith = ans[1], trial = ans[2])
+
+@app.route('/game/get_strategy', methods = ['GET', 'POST'])
+def get_strategy():
+    if not require(request, ['rules']):
+        return fail('Key Missing')
+    
+    rules = request.values['rules']
+
+    ans = lib.game.get_strategy(rules)
+    if ans is None:
+        return fail('Model Failed')
+    
+    return ok(ans)
