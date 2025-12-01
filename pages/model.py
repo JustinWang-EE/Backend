@@ -42,34 +42,3 @@ def get_strategy():
         return fail('Model Failed')
     
     return ok(ans)
-
-ds = {}
-
-@app.route('/game/number', methods = ['GET', 'POST'])
-def save_number():
-    if not require(request, ['number', 'username']):
-        return fail('Key missing')
-
-    username = request.values['username']
-    number = request.values['number']
-
-    try:
-        number = int(number)
-        assert(0 <= number <= 100)
-    except:
-        return fail('Number needed')
-
-    ds[username] = number
-
-    return ok()
-
-@app.route('/game/get_number', methods = ['GET', 'POST'])
-def send_number():
-    f = []
-    for i in ds:
-        f.append([i, ds[i]])
-    mean = sum([i[1] for i in f]) * 2 / 3 / len(f)
-    for i in range(len(f)):
-        f[i].append(abs(f[i][1] - mean))
-    f = sorted(f, key = lambda x: x[2])
-    return ok(ls = f, mean = mean)
