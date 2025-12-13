@@ -1,3 +1,6 @@
 [submodule "core"]
 	path = core
 	url = https://github.com/mysh212/python_core
+[submodule "game_core"]
+	path = game_core
+	url = https://github.com/JustinWang-EE/game_core.git
