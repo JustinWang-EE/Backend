@@ -9,6 +9,8 @@ from pages.test import app as test
 from pages.model import app as model
 
 app = Flask(__name__)
+from pages.game_adapter import app as game_adapter
+app.register_blueprint(game_adapter)
 CORS(app)
 # cors = CORS(app, resources={r"/*": {"origins": "domains"}})
 
@@ -23,3 +25,4 @@ if __name__ == '__main__':
     if env('debug'): app.debug = True;
     app.run()
     quit()
+
